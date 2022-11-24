@@ -8,8 +8,6 @@ import json
 from bs4 import BeautifulSoup
 import time
 
-minitemprice = 50000000
-
 # Add your Corp or Alliance ID
 allianceID = 
 allianceName = ""
