@@ -11,9 +11,9 @@ import time
 minitemprice = 50000000
 
 # Add your Corp or Alliance ID
-allianceID = 99001105
-corporationID = 98512964
-allalliancekillswebhookurl = "https://discord.com/api/webhooks/1040550494185209948/t6cmlErFvq95y61g-hClAFAADiZWMdMKtwIxQ7M1qaLPjqUM42vdAaAnG_9GYzoCm14v"
+allianceID = 
+corporationID = 
+allalliancekillswebhookurl = ""
 
 global toggle
 toggle = False
