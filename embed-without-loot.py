@@ -78,10 +78,14 @@ def getkill():
             for alliance in alliances:
                 alliance = alliances.get('title')
 
-            print(alliance)
             title = ship.strip() + " destroyed in " + system.strip()
-
-            embed = discord.Embed(title=title, url=killid, colour = discord.Colour.green())
+            
+            if alliance == allianceName:
+                choosecolour = discord.Colour.red()
+            else:
+                choosecolour = discord.Colour.green()
+            
+            embed = discord.Embed(title=title, url=killid, colour = choosecolour)
             embed.set_thumbnail(url=image)
             embed.add_field(name="Victim", value=name, inline=True)
             embed.add_field(name="Corporation", value=corp, inline=True)
