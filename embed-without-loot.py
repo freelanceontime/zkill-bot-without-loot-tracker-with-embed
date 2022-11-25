@@ -8,11 +8,13 @@ import json
 from bs4 import BeautifulSoup
 import time
 
+minitemprice = 50000000
+
 # Add your Corp or Alliance ID
-allianceID = 
-allianceName = ""
-corporationID = 
-allalliancekillswebhookurl = ""
+allianceID = 99001105
+allianceName = "Seventh Sanctum."
+corporationID = 98512964
+allalliancekillswebhookurl = "https://discord.com/api/webhooks/1040550494185209948/t6cmlErFvq95y61g-hClAFAADiZWMdMKtwIxQ7M1qaLPjqUM42vdAaAnG_9GYzoCm14v"
 
 global toggle
 toggle = False
@@ -40,6 +42,7 @@ def getkill():
             soup = BeautifulSoup(page.content, 'html.parser', on_duplicate_attribute='ignore')
 
             imageurl = soup.find("meta", attrs={'name':'og:image'}, content=True)
+
             image = imageurl["content"] + "?size=64"
 
             tab = soup.find("table",{"class":"table table-condensed"})
@@ -52,6 +55,14 @@ def getkill():
 
             tab3 = soup.find("th",{"class":"hidden-md hidden-xs"})
             involved = tab3.text.strip()
+
+            description = soup.find("meta", attrs={'name':'og:description'}, content=True)
+            cleanDescription = (description["content"])
+            separator = 'Final Blow by '
+            result_1 = cleanDescription.split(separator, 1)[1]
+            separator2 = '. Total Value'
+            result_2 = result_1.split(separator2, 1)[0]
+
 
             column1 = []
             column2 = []
@@ -77,14 +88,15 @@ def getkill():
             for alliance in alliances:
                 alliance = alliances.get('title')
 
+            print(alliance)
             title = ship.strip() + " destroyed in " + system.strip()
-            
+
             if alliance == allianceName:
                 choosecolour = discord.Colour.red()
             else:
                 choosecolour = discord.Colour.green()
-            
-            embed = discord.Embed(title=title, url=killid, colour = choosecolour)
+
+            embed = discord.Embed(title=title, url=killid, colour=choosecolour)
             embed.set_thumbnail(url=image)
             embed.add_field(name="Victim", value=name, inline=True)
             embed.add_field(name="Corporation", value=corp, inline=True)
@@ -93,6 +105,8 @@ def getkill():
 
             for i in range(len(column1)):
                 embed.add_field(name=column1[i], value=column2[i], inline=True)
+
+            embed.add_field(name="Killed by", value=result_2, inline=True)
 
             webhook = SyncWebhook.from_url(allalliancekillswebhookurl) 
             webhook.send(embed=embed)
