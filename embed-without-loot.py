@@ -115,10 +115,10 @@ def getkill():
             print("kill reported")
 
 while True:
-    # try:
-    getkill()
-    # except:
-        # print("Connection Lost")
-        # pass
+    try:
+        getkill()
+    except:
+        print("Connection Lost")
+        pass
 
 
